@@ -48,7 +48,7 @@ func day2_part1(input []string) int {
 }
 
 func day2_part2(input []string) int {
-	wrappingPaper := 0
+	ribbonLength := 0
 
 	sides := make([]int, 3)
 	for _, box := range input {
@@ -65,10 +65,10 @@ func day2_part2(input []string) int {
 		ribbon1 := sides[0]*2 + sides[1]*2
 		ribbon2 := sides[0] * sides[1] * sides[2]
 
-		wrappingPaper = wrappingPaper + ribbon1 + ribbon2
+		ribbonLength = ribbonLength + ribbon1 + ribbon2
 	}
 
-	return wrappingPaper
+	return ribbonLength
 }
 
 func day2_setup(input string, path bool) []string {
