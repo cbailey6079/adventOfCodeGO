@@ -47,39 +47,32 @@ func day3_part1(input string) int {
 func day3_part2(input string) int {
 	houses := make(map[string]int)
 	x, y, x2, y2 := 0, 0, 0, 0
+	var tempx *int
+	var tempy *int
 
 	houses[fmt.Sprintf("%d,%d", x, y)] = 1
 
 	for index, direction := range strings.Split(input, "") {
 		if index%2 == 0 {
-			switch direction {
-			case "^":
-				y++
-			case ">":
-				x++
-			case "v":
-				y--
-			case "<":
-				x--
-			}
-
-			houses[fmt.Sprintf("%d,%d", x, y)] = houses[fmt.Sprintf("%d,%d", x, y)] + 1
-
+			tempx = &x
+			tempy = &y
 		} else {
-			switch direction {
-			case "^":
-				y2++
-			case ">":
-				x2++
-			case "v":
-				y2--
-			case "<":
-				x2--
-			}
-
-			houses[fmt.Sprintf("%d,%d", x2, y2)] = houses[fmt.Sprintf("%d,%d", x2, y2)] + 1
+			tempx = &x2
+			tempy = &y2
 		}
 
+		switch direction {
+		case "^":
+			*tempy++
+		case ">":
+			*tempx++
+		case "v":
+			*tempy--
+		case "<":
+			*tempx--
+		}
+
+		houses[fmt.Sprintf("%d,%d", *tempx, *tempy)] = houses[fmt.Sprintf("%d,%d", *tempx, *tempy)] + 1
 	}
 
 	return len(houses)
